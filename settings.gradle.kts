@@ -13,6 +13,6 @@ plugins {
 }
 
 rootProject.name = "ponder"
-include("Common")
-include("Forge")
-include("Fabric")
+include("common")
+include("forge")
+include("fabric")

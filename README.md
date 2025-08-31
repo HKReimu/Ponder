@@ -1,4 +1,4 @@
-<p align="center"><img src="./.idea/icon.png" alt="Logo" width="200">
+<p align="center"><img src="./common/src/main/resources/logo.png" alt="Logo" width="200">
 <h1 align="center">Ponder<br>
 	<a href="https://www.patreon.com/simibubi"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dsimibubi%26type%3Dpatrons&style=flat&label=Supporters&color=ff5733" alt="Patreon"></a>
 	<a href="https://github.com/Creators-of-Create/Ponder/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Creators-of-Create/Ponder?style=flat&color=900c3f" alt="License"></a>

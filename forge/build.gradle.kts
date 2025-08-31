@@ -22,7 +22,7 @@ tasks.jar {
 legacyForge {
     version = "${"minecraft_version"()}-${"forge_version"()}"
 
-    accessTransformers.from(project(":Common").file("src/main/resources/META-INF/accesstransformer.cfg"))
+    accessTransformers.from(project(":common").file("src/main/resources/META-INF/accesstransformer.cfg"))
 
     parchment {
         minecraftVersion = "minecraft_version"()

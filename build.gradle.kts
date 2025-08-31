@@ -124,7 +124,7 @@ subprojects {
     }
 
     // from here down is platform configuration
-    if (project.path == ":Common") {
+    if (project.path == ":common") {
         return@subprojects
     }
 
@@ -138,9 +138,9 @@ subprojects {
     }
 
     dependencies {
-        compileOnly(project(":Common"))
-        "commonJava"(project(path = ":Common", configuration = "commonJava"))
-        "commonResources"(project(path = ":Common", configuration = "commonResources"))
+        compileOnly(project(":common"))
+        "commonJava"(project(path = ":common", configuration = "commonJava"))
+        "commonResources"(project(path = ":common", configuration = "commonResources"))
     }
 
     tasks.named<JavaCompile>("compileJava") {
