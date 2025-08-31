@@ -4,7 +4,9 @@ plugins {
 }
 
 loom {
-    accessWidenerPath = project(":Common").file("src/main/resources/META-INF/ponder.accesswidener")
+    accessWidenerPath = project(":Common").file("src/main/resources/META-INF/${"mod_id"()}.accesswidener")
+
+    mixin.defaultRefmapName.set("${"mod_id"()}.refmap.json")
 
     runs {
         configureEach {
@@ -15,8 +17,14 @@ loom {
             vmArg("-Dmixin.env.refMapRemappingFile=${projectDir}/build/createSrgToMcp/output.srg")
         }
 
+        getByName("client") {
+            client()
+            ideConfigGenerated(true)
+        }
+
         getByName("server") {
             server()
+            ideConfigGenerated(true)
             runDir("run/server")
         }
     }
@@ -30,7 +38,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${"fabric_version"()}")
 
     modApi("dev.engine-room.flywheel:flywheel-fabric-api-${"minecraft_version"()}:${"flywheel_version"()}")
-    modImplementation(include("dev.engine-room.flywheel:flywheel-fabric-${"minecraft_version"()}:${"flywheel_version"()}")!!)
+    modImplementation("dev.engine-room.flywheel:flywheel-fabric-${"minecraft_version"()}:${"flywheel_version"()}")
 
     for (module in "port_lib_modules"().split(",")) {
         modApi(include("io.github.fabricators_of_create.Porting-Lib:$module:${"port_lib_version"()}")!!)

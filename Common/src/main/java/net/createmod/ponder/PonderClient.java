@@ -44,7 +44,6 @@ public class PonderClient {
 		if (CatnipServices.PLATFORM.isDevelopmentEnvironment()) {
 			PonderIndex.addPlugin(new DebugPonderPlugin());
 		}
-
 	}
 
 	public static void modLoadCompleted() {

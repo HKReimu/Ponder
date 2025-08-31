@@ -25,7 +25,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.ItemStack;
 
 public class FabricPonderClient implements ClientModInitializer {
-
 	public static final FabricClientResourceReloadListener FABRIC$RESOURCE_RELOAD_LISTENER = new FabricClientResourceReloadListener();
 
 	@Override

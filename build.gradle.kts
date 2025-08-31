@@ -18,8 +18,8 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "maven-publish")
 
-    base.archivesName.set("ponder-${project.name}")
     group = "maven_group"()
+    base.archivesName.set("${"mod_id"()}-${project.name}")
     version = "${"mod_version"()}.${buildNumber ?: "0"}+mc${"minecraft_version"()}"
 }
 
@@ -30,6 +30,7 @@ subprojects {
     val capitalizedName = project.name.capitalized()
 
     repositories {
+        exclusiveMaven("https://repo.spongepowered.org/repository/maven-public/", "org.spongepowered:mixin")
         exclusiveMaven("https://maven.createmod.net", "dev.engine-room.flywheel")
         exclusiveMaven(
             "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/",
@@ -75,7 +76,7 @@ subprojects {
 
     tasks.processResources {
         val expandProps = mapOf(
-            "version" to "mod_version"(),
+            "version" to project.version,
             "group" to project.group, //Else we target the task's group.
             "minecraft_version" to "minecraft_version"(),
             "forge_version" to "forge_version"(),
@@ -100,7 +101,9 @@ subprojects {
         inputs.properties(expandProps)
 
         doLast {
-            for (file in fileTree(setOf("**/*.json", "**/*.mcmeta"))) {
+            fileTree(outputs.files.asPath) {
+                include("**/*.json", "**/*.mcmeta")
+            }.forEach { file ->
                 file.writeText(JsonOutput.toJson(JsonSlurper().parse(file)))
             }
         }

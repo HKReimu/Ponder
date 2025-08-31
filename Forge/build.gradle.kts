@@ -4,6 +4,8 @@ plugins {
 }
 
 mixin {
+    add(sourceSets["main"], "${"mod_id"()}.refmap.json")
+
     config("${"mod_id"()}.mixins.json")
     config("${"mod_id"()}-common.mixins.json")
 }
