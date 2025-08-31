@@ -17,14 +17,12 @@ boolean inMultiModWorkspace = rootProject.hasProperty("multiModWorkspace.enabled
 project.logger.lifecycle("MultiModWorkspace ${inMultiModWorkspace ? "enabled" : "disabled"} for project ${mod_id}:${project.name}.")
 
 // -- Mixin Support
-if (project.ext.mixin_enabled) {
-    mixin {
-        // Tells the mixin plugin where to put the generated refmap file.
-        add(sourceSets.main, "${mod_id}.refmap.json")
+mixin {
+    // Tells the mixin plugin where to put the generated refmap file.
+    add(sourceSets.main, "${mod_id}.refmap.json")
 
-        config("${mod_id}.mixins.json")
-        config("${mod_id}-common.mixins.json")
-    }
+    config("${mod_id}.mixins.json")
+    config("${mod_id}-common.mixins.json")
 }
 
 println "Java: ${System.getProperty "java.version"}, JVM: ${System.getProperty "java.vm.version"} (${System.getProperty "java.vendor"}), Arch: ${System.getProperty "os.arch"}"
@@ -60,9 +58,7 @@ minecraft {
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
 
-            if (project.ext.mixin_enabled) {
-                arg "-mixin.config=${mod_id}.mixins.json"
-            }
+            arg "-mixin.config=${mod_id}.mixins.json"
 
             mods {
                 ponder {
@@ -149,7 +145,7 @@ project.publishing {
                 }
             }
 
-            url getDefaultString("mavenURL", "undefined", true)
+            //url getDefaultString("mavenURL", "undefined", true)
         }
     }
 }

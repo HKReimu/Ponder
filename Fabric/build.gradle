@@ -116,7 +116,7 @@ project.publishing {
                 }
             }
 
-            url getDefaultString("mavenURL", "undefined", true)
+            //url getDefaultString("mavenURL", "undefined", true)
         }
     }
 }
