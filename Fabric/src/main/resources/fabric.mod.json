@@ -18,7 +18,7 @@
     "ponder.mixins.json",
     "ponder-common.mixins.json"
   ],
-  "accessWidener": "fabric_ponder.accesswidener",
+  "accessWidener": "META-INF/ponder.accesswidener",
   "entrypoints": {
     "main": [
       "net.createmod.ponder.FabricPonder"

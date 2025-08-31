@@ -36,18 +36,15 @@
     the value of signing.secretKeyRingFile.
 */
 
-def canLoad = true
+var canLoad = true
 
-//
 if (!project.hasProperty("signing.secretKeyRingFile") && project.hasProperty("pgpKeyRing")) {
-    final def keyRing = file project.getProperty("pgpKeyRing")
+    val keyRing = file(project.property("pgpKeyRing")!!)
 
     if (keyRing.exists() && keyRing.name.endsWith(".gpg")) {
-        project.ext.set("signing.secretKeyRingFile", keyRing.getAbsolutePath())
+        project.extensions.extraProperties["signing.secretKeyRingFile"] = keyRing.absolutePath
         project.logger.lifecycle("Loaded PGP keyring from fallback property.")
-    }
-
-    else {
+    } else {
         project.logger.warn("Failed to load PGP keyring from pgpKeyRing fallback property.")
     }
 }
@@ -68,10 +65,12 @@ if (!project.hasProperty("signing.password")) {
 }
 
 if (canLoad) {
-    apply plugin: "signing"
+    apply(plugin = "signing")
 
-    signing {
-        project.logger.lifecycle("Artefacts will be signed using PGP.")
-        sign publishing.publications
+    extensions.configure<SigningExtension>("signing") {
+        logger.lifecycle("Artefacts will be signed using PGP.")
+
+        val publishing = extensions.getByType(PublishingExtension::class.java)
+        sign(publishing.publications)
     }
 }

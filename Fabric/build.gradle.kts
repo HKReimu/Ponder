@@ -1,0 +1,47 @@
+plugins {
+    id("fabric-loom")
+    id("net.createmod.ponder.gradle")
+}
+
+loom {
+    accessWidenerPath = project(":Common").file("src/main/resources/META-INF/ponder.accesswidener")
+
+    runs {
+        configureEach {
+            vmArg("-XX:+AllowEnhancedClassRedefinition")
+            vmArg("-XX:+IgnoreUnrecognizedVMOptions")
+            vmArg("-Dmixin.debug.export=true")
+            vmArg("-Dmixin.env.remapRefMap=true")
+            vmArg("-Dmixin.env.refMapRemappingFile=${projectDir}/build/createSrgToMcp/output.srg")
+        }
+
+        getByName("server") {
+            server()
+            runDir("run/server")
+        }
+    }
+}
+
+dependencies {
+    minecraft("com.mojang:minecraft:${"minecraft_version"()}")
+    mappings(loom.officialMojangMappings())
+
+    modImplementation("net.fabricmc:fabric-loader:${"fabric_loader_version"()}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${"fabric_version"()}")
+
+    modApi("dev.engine-room.flywheel:flywheel-fabric-api-${"minecraft_version"()}:${"flywheel_version"()}")
+    modImplementation(include("dev.engine-room.flywheel:flywheel-fabric-${"minecraft_version"()}:${"flywheel_version"()}")!!)
+
+    for (module in "port_lib_modules"().split(",")) {
+        modApi(include("io.github.fabricators_of_create.Porting-Lib:$module:${"port_lib_version"()}")!!)
+    }
+
+    modApi(include("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:8.0.0")!!) //source: https://github.com/Fuzss/forgeconfigapiport-fabric
+    implementation(include("javax.annotation:javax.annotation-api:1.3.2")!!)
+    implementation(include("com.google.code.findbugs:jsr305:3.0.2")!!)
+}
+
+operator fun String.invoke(): String {
+    return rootProject.ext[this] as? String
+        ?: throw IllegalStateException("Property $this is not defined")
+}

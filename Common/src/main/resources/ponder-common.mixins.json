@@ -1,20 +1,23 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "net.createmod.ponder.mixin",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "accessor.EntityAccessor"
-    ],
-    "client": [
-        "client.WindowResizeMixin",
-        "client.accessor.BufferBuilderAccessor",
-        "client.accessor.GameRendererAccessor",
-        "client.accessor.RenderSystemAccessor",
-        "client.accessor.RenderTypeAccessor"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    },
-    "refmap": "${mod_id}.refmap.json"
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.createmod.ponder.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${mod_id}.refmap.json",
+  "client": [
+    "client.WindowResizeMixin",
+    "client.accessor.BufferBuilderAccessor",
+    "client.accessor.GameRendererAccessor",
+    "client.accessor.RenderSystemAccessor",
+    "client.accessor.RenderTypeAccessor"
+  ],
+  "mixins": [
+    "accessor.EntityAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }

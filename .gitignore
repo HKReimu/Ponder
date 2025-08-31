@@ -1,4 +1,4 @@
-# eclipse
+# Eclipse
 bin
 *.launch
 .settings
@@ -6,17 +6,41 @@ bin
 .classpath
 .project
 
-# idea
+# Idea
 out
 *.ipr
 *.iws
 *.iml
 .idea
 
-# gradle
+# Kotlin
+.kotlin
+
+# Gradle
 build
 .gradle
 
-# other
+# Other
 eclipse
 run
+.DS_Store
+
+# Vitepress
+docs/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Node.JS
+docs/node_modules/
+docs/dist/
+docs/dist-ssr/
+docs/*.local
+
+# Editor directories and files
+docs/.vscode/*
+docs/!.vscode/extensions.json
+docs/*.suo
+docs/*.ntvs*
+docs/*.njsproj
+docs/*.sln
+docs/*.sw?
