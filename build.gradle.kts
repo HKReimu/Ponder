@@ -5,13 +5,11 @@ import org.gradle.internal.extensions.stdlib.capitalized
 plugins {
     java
     `maven-publish`
-    id("fabric-loom") version "loom_version"() apply false
-    id("net.neoforged.moddev.legacyforge") version "mdg_version"() apply false
+    id("fabric-loom") apply false
+    id("net.neoforged.moddev.legacyforge") apply false
 }
 
 apply(from = "gradle/property_loader.gradle.kts")
-
-println("Numismatics v${"mod_version"()}")
 
 val buildNumber = providers.environmentVariable("BUILD_NUMBER").orNull
 val gitHash = calculateGitHash() + (if (hasUnstaged()) "-modified" else "")
@@ -114,6 +112,7 @@ subprojects {
         }
 
         val mavenUrl = providers.environmentVariable("mavenURL")
+        repositories.mavenLocal()
         repositories.maven {
             mavenUrl.orNull?.let {
                 url = uri(mavenUrl)

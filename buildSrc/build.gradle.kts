@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     `kotlin-dsl`
     id("java-gradle-plugin")
@@ -8,6 +10,8 @@ repositories {
     gradlePluginPortal()
     mavenCentral()
     maven("https://maven.ithundxr.dev/releases")
+    maven("https://maven.fabricmc.net")
+    maven("https://maven.neoforged.net/releases")
 }
 
 gradlePlugin {
@@ -19,12 +23,21 @@ gradlePlugin {
     }
 }
 
+val properties by lazy {
+    Properties().apply {
+        load(rootDir.parentFile.resolve("gradle.properties").inputStream())
+    }
+}
+
 dependencies {
     implementation("org.ow2.asm:asm:${"asm_version"()}")
     implementation("org.ow2.asm:asm-tree:${"asm_version"()}")
     implementation("org.ow2.asm:asm-util:${"asm_version"()}")
 
     implementation("dev.ithundxr.lotus:lotus-gradle:${"lotus_gradle_version"()}")
+
+    implementation("fabric-loom:fabric-loom.gradle.plugin:${properties["loom_version"]}")
+    implementation("net.neoforged.moddev.legacyforge:net.neoforged.moddev.legacyforge.gradle.plugin:${properties["mdg_version"]}")
 }
 
 operator fun String.invoke(): String {
