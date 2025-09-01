@@ -116,11 +116,20 @@ subprojects {
             from(components["java"])
         }
 
-        val mavenUrl = providers.environmentVariable("mavenURL")
-        repositories.mavenLocal()
-        repositories.maven {
-            mavenUrl.orNull?.let {
-                url = uri(mavenUrl)
+        val mavenUrl = providers.gradleProperty("mavenURL").orNull
+        val mavenUsername = providers.gradleProperty("mavenUsername").orNull
+        val mavenPassword = providers.gradleProperty("mavenPassword").orNull
+
+        mavenUrl?.let {
+            repositories.maven {
+                if (mavenUsername != null && mavenPassword != null) {
+                    credentials {
+                        username = mavenUsername
+                        password = mavenPassword
+                    }
+                }
+
+                url = uri(it)
             }
         }
     }
