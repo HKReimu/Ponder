@@ -1,6 +1,5 @@
 plugins {
     id("fabric-loom")
-    id("net.createmod.ponder.gradle")
 }
 
 loom {

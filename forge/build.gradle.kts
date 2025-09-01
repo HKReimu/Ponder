@@ -1,5 +1,4 @@
 plugins {
-    id("net.createmod.ponder.gradle")
     id("net.neoforged.moddev.legacyforge")
 }
 

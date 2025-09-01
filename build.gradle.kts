@@ -16,7 +16,6 @@ val gitHash = calculateGitHash() + (if (hasUnstaged()) "-modified" else "")
 
 allprojects {
     apply(plugin = "java")
-    apply(plugin = "maven-publish")
 
     group = "maven_group"()
     base.archivesName.set("${"mod_id"()}-${project.name}")
@@ -26,6 +25,9 @@ allprojects {
 subprojects {
     apply(from = "../gradle/property_loader.gradle.kts")
     apply(from = "../gradle/signing.gradle.kts")
+
+    apply(plugin = "maven-publish")
+    apply(plugin = "net.createmod.ponder.gradle")
 
     val capitalizedName = project.name.capitalized()
 
