@@ -34,7 +34,7 @@ ij_java_class_count_to_use_import_on_demand = 99
 ij_java_names_count_to_use_import_on_demand = 99
 ij_java_imports_layout = $*,|,java.**,|,javax.**,|,org.**,|,com.**,|,*
 
-[*.ts]
+[*.{js,ts}]
 indent_size = 2
 ij_javascript_use_semicolon_after_statement = true
 ij_javascript_force_semicolon_style = true
@@ -45,3 +45,6 @@ ij_javascript_use_double_quotes = true
 
 [*.css]
 indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
